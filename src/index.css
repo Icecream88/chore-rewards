@@ -1,0 +1,74 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* 1) Theme tokens: colors, shadows, and animations */
+@theme {
+  --radius-card:     16px;
+  --color-primary:   #3B82F6;
+  --color-success:   #10B981;
+  --color-yellow:    #FACC15;
+  --card-shadow:     0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+}
+
+/* 2) Base resets + typography */
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  html { font-family: 'Inter', sans-serif; }
+  *, ::before, ::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f8fafc; color: #111827; }
+}
+
+/* 3) Components: cards, buttons, toggle, and coin float */
+@layer components {
+  .card {
+    @apply bg-white p-6 rounded-[var(--radius-card)];
+    box-shadow: var(--card-shadow);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 font-medium rounded-[var(--radius-card)] transition-shadow transition-colors;
+    background-color: var(--color-primary);
+    color: white;
+  }
+  .btn-primary:hover {
+    @apply shadow-xl;
+    background-color: rgb(59 130 246 / 0.9);
+  }
+
+  .toggle-switch {
+    @apply relative inline-block w-12 h-6 bg-gray-200 cursor-pointer;
+    border-radius: var(--radius-card);
+  }
+  .toggle-switch::after {
+    content: '';
+    @apply absolute top-0.5 left-0.5 w-5 h-5 bg-white shadow transition-transform;
+    border-radius: var(--radius-card);
+  }
+  .toggle-input:checked + .toggle-switch {
+    background-color: var(--color-primary);
+  }
+  .toggle-input:checked + .toggle-switch::after {
+    transform: translateX(100%);
+  }
+
+  /* Floating coin animation */
+  .float-coin {
+    @apply absolute text-[var(--color-yellow)] font-bold pointer-events-none;
+    animation: float 1s ease-out forwards;
+  }
+}
+
+/* 4) Utilities: keyframes and extra utilities */
+@layer utilities {
+  @keyframes float {
+    0%   { transform: translateY(0) scale(1); opacity: 1; }
+    80%  { transform: translateY(-30px) scale(1.2); opacity: 0.8; }
+    100% { transform: translateY(-60px) scale(1.4); opacity: 0; }
+  }
+
+  .animate-float {
+    animation-name: float;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+}

@@ -1,0 +1,1 @@
+import CoinIcon from '../assets/icons/CoinIcon.svg';
