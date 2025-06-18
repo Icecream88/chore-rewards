@@ -18,7 +18,10 @@ const ChoresPanel = ({ chores, onToggle, onAdd, onClear }) => {
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Today's Chores</h2>
         {viewMode === 'parent' && (
-          <button onClick={onClear} className="text-red-600 hover:underline text-sm">
+          <button
+            onClick={onClear}
+            className="text-red-600 hover:underline text-sm active:scale-95 active:shadow-inner"
+          >
             Clear All
           </button>
         )}
@@ -33,8 +36,8 @@ const ChoresPanel = ({ chores, onToggle, onAdd, onClear }) => {
         </div>
       </div>
 
-      {/* Scrollable chore list */}
-      <div className="flex-1 overflow-y-auto space-y-2 pr-2">
+      {/* Scrollable chore list with fade-in */}
+      <div className="flex-1 overflow-y-auto space-y-2 pr-2 animate-fade-in">
         {totalCount > 0 ? (
           chores.map(chore => (
             <ChoreItem

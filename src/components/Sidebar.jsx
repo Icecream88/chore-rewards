@@ -12,16 +12,16 @@ const Sidebar = ({ stats, coinBalance, autoApprove, onToggleAutoApprove, history
     <div className="space-y-6">
       {/* Dashboard card: fixed height, with view-mode selector */}
       <div className="card flex flex-col h-[600px] space-y-6">
-        {/* Header */}
+        {/* Header with view toggle */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <InformationCircleIcon className="w-5 h-5 text-[var(--color-info)]" />
-            <h2 className="text-xl font-semibold">Dashboard</h2>
+            <h2 className="text-2xl font-semibold">Dashboard</h2>
           </div>
           <select
             value={viewMode}
             onChange={e => setViewMode(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1"
+            className="border border-gray-300 rounded px-2 py-1 bg-white text-sm transition-shadow active:scale-95"
           >
             <option value="parent">Parent View</option>
             <option value="child">Child View</option>
@@ -30,7 +30,7 @@ const Sidebar = ({ stats, coinBalance, autoApprove, onToggleAutoApprove, history
 
         {/* Coin Balance */}
         <div className="bg-yellow-100 p-4 rounded-lg flex items-center justify-center mb-4">
-          <img src={coinIconUrl} alt="Coin" className="w-6 h-6 text-[var(--color-yellow)]" />
+          <img src={coinIconUrl} alt="Coin" className="w-6 h-6" />
           <span className="ml-2 text-3xl font-semibold text-[var(--color-yellow)]">
             {coinBalance}
           </span>
@@ -38,17 +38,17 @@ const Sidebar = ({ stats, coinBalance, autoApprove, onToggleAutoApprove, history
 
         {/* Stats */}
         <div className="mb-4">
-          <h3 className="text-lg font-medium mb-2">Stats</h3>
+          <h3 className="text-xl font-medium mb-2">Stats</h3>
           <Stats stats={stats} />
         </div>
 
-        {/* Redemption History: scrollable */}
-        <div className="flex-1 overflow-y-auto">
-          <h3 className="text-lg font-medium mb-2">Redeem History</h3>
+        {/* Redemption History: scrollable, fade-in */}
+        <div className="flex-1 overflow-y-auto animate-fade-in">
+          <h3 className="text-xl font-medium mb-2">Redeem History</h3>
           {history.length > 0 ? (
             <ul className="space-y-2">
               {history.map((entry, idx) => (
-                <li key={idx} className="flex justify-between text-sm">
+                <li key={idx} className="flex justify-between text-sm leading-snug">
                   <span>{entry.title}</span>
                   <span className="text-gray-500">{entry.date}</span>
                 </li>
@@ -64,7 +64,7 @@ const Sidebar = ({ stats, coinBalance, autoApprove, onToggleAutoApprove, history
       {viewMode === 'parent' && (
         <div className="card flex items-center justify-between">
           <span className="font-medium">Auto-approve</span>
-          <label className="relative inline-block w-12 h-6">
+          <label className="relative inline-block w-12 h-6 active:scale-95">
             <input
               type="checkbox"
               className="toggle-input sr-only"

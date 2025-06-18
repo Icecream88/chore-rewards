@@ -23,7 +23,7 @@ const computeStreak = dates => {
 const initialRewards = [
   { id: 1, title: '30 Minutes of Gaming',  coins: 50,  tag: 'Most popular',   icon: 'GameIcon.svg',     bgClass: 'bg-light-blue'  },
   { id: 2, title: 'Movie Night Pick',      coins: 100, tag: 'New',            icon: 'MovieIcon.svg',    bgClass: 'bg-light-green' },
-  { id: 3, title: '$5 Allowance',          coins: 150, tag: 'Popular',        icon: 'AllowanceIcon.svg',bgClass: 'bg-light-purple'},
+  { id: 3, title: '$5 Allowance',          coins: 150, tag: 'Popular',        icon: 'AllowanceIcon2.svg',bgClass: 'bg-light-purple'},
   { id: 4, title: 'Special Dessert',       coins: 75,  tag: 'Tasty!',         icon: 'DessertIcon.svg',  bgClass: 'bg-light-red'   },
   { id: 5, title: 'Stay Up Late (30 min)', coins: 60,  tag: 'Weekend only',   icon: 'ClockIcon.svg',    bgClass: 'bg-light-yellow'},
   { id: 6, title: 'Skip One Chore',        coins: 125, tag: 'Limited use',    icon: 'SkipIcon.svg',     bgClass: 'bg-light-blue'  },

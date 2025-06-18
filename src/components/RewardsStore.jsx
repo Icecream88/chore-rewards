@@ -10,28 +10,24 @@ const RewardsStore = ({ rewards, onRedeem }) => {
 
   // Sort logic based on selection
   const sorted = [...rewards].sort((a, b) => {
-    if (sortBy === 'Price: low to high') return a.coins - b.coins
-    if (sortBy === 'Price: high to low') return b.coins - a.coins
-    if (sortBy === 'Newest') return b.id - a.id
-    // Popular or default keeps original order
-    return 0
+    if (sortBy === 'Price: low to high')   return a.coins - b.coins
+    if (sortBy === 'Price: high to low')  return b.coins - a.coins
+    if (sortBy === 'Newest')              return b.id - a.id
+    return 0 // Popular or default
   })
 
   return (
     <div className="card space-y-4">
       {/* Header with conditional sort/filter */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Rewards Store</h2>
+        <h2 className="text-2xl font-semibold">Rewards Store</h2>
         {viewMode === 'parent' && (
-          <SortFilter
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-          />
+          <SortFilter sortBy={sortBy} onSortChange={setSortBy} />
         )}
       </div>
 
-      {/* Grid of reward cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {/* Grid of reward cards with fade-in */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in">
         {sorted.map(reward => (
           <RewardCard
             key={reward.id}

@@ -4,18 +4,36 @@
 /* 1) Theme tokens: colors, shadows, and animations */
 @theme {
   --radius-card:     16px;
-  --color-primary:   #3B82F6;
-  --color-success:   #10B981;
-  --color-yellow:    #FACC15;
+  --color-primary:   #3B82F6;   /* ChoreRewards brand blue */
+  --color-secondary: #64748B;   /* muted slate for text */
+  --color-tertiary:  #E2E8F0;   /* light gray backgrounds */
+  --color-success:   #10B981;   /* green for progress */
+  --color-warning:   #F59E0B;   /* amber */
+  --color-error:     #EF4444;   /* red for alerts */
+  --color-yellow:    #FACC15;   /* coin badge */
+  --color-info:      #3B82F6;   /* info icons */
   --card-shadow:     0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
 }
 
 /* 2) Base resets + typography */
 @layer base {
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  html { font-family: 'Inter', sans-serif; }
+  html {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  body {
+    @apply text-base leading-relaxed tracking-normal;
+    background: var(--color-tertiary);
+    color: var(--color-secondary);
+  }
+  h1 { @apply text-3xl font-bold leading-tight tracking-wide text-[var(--color-primary)]; }
+  h2 { @apply text-2xl font-semibold leading-snug tracking-wide; }
+  h3 { @apply text-xl font-semibold leading-snug; }
+  h4 { @apply text-lg font-medium; }
+  p  { @apply mb-4; }
   *, ::before, ::after { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f8fafc; color: #111827; }
 }
 
 /* 3) Components: cards, buttons, toggle, and coin float */
@@ -23,16 +41,27 @@
   .card {
     @apply bg-white p-6 rounded-[var(--radius-card)];
     box-shadow: var(--card-shadow);
+    color: var(--color-secondary);
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-4 py-2 font-medium rounded-[var(--radius-card)] transition-shadow transition-colors;
+    @apply inline-flex items-center justify-center px-4 py-2 font-medium rounded-[var(--radius-card)] transition-shadow transition-colors active:scale-95 active:shadow-inner;
     background-color: var(--color-primary);
     color: white;
   }
   .btn-primary:hover {
     @apply shadow-xl;
     background-color: rgb(59 130 246 / 0.9);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 font-medium rounded-[var(--radius-card)] transition-shadow transition-colors active:scale-95 active:shadow-inner;
+    background-color: var(--color-secondary);
+    color: white;
+  }
+  .btn-secondary:hover {
+    @apply shadow-md;
+    background-color: rgb(100 116 139 / 0.9);
   }
 
   .toggle-switch {
@@ -51,24 +80,47 @@
     transform: translateX(100%);
   }
 
-  /* Floating coin animation */
   .float-coin {
     @apply absolute text-[var(--color-yellow)] font-bold pointer-events-none;
     animation: float 1s ease-out forwards;
   }
 }
 
-/* 4) Utilities: keyframes and extra utilities */
+/* 4) Utilities: keyframes and backgrounds */
 @layer utilities {
   @keyframes float {
     0%   { transform: translateY(0) scale(1); opacity: 1; }
     80%  { transform: translateY(-30px) scale(1.2); opacity: 0.8; }
     100% { transform: translateY(-60px) scale(1.4); opacity: 0; }
   }
-
   .animate-float {
     animation-name: float;
     animation-duration: 1s;
     animation-fill-mode: forwards;
   }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  .animate-pop {
+    animation: pop 0.3s ease-out;
+  }
+
+  .bg-light-blue   { background-color: #EFF6FF; }
+  .bg-light-green  { background-color: #ECFDF5; }
+  .bg-light-purple { background-color: #F5F3FF; }
+  .bg-light-red    { background-color: #FEF2F2; }
+  .bg-light-yellow { background-color: #FEFCE8; }
+  .bg-light-pink   { background-color: #FDF2F8; }
+  .bg-light-orange { background-color: #FFF7ED; }
 }
